@@ -51,4 +51,3 @@ repos:
         exclude: "alembic/"
         additional_dependencies:
 $PRE_COMMIT_ADDITIONAL_DEPENDENCIES
-

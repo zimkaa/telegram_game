@@ -32,4 +32,3 @@ RUN chown -R appuser:appgroup /home/appuser/app
 USER appuser
 
 ENTRYPOINT ["./entrypoint.sh"]
-

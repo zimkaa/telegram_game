@@ -21,7 +21,6 @@ class Settings(BaseSettings):
     DEBUG: bool = Field(default=False)
     LOGGER: logging.Logger = Field(default=logging.getLogger("SalesLogger"))
 
-
     @computed_field  # type: ignore[misc]
     @property
     def APP_VERSION(self) -> str:  # noqa: N802
@@ -34,4 +33,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
