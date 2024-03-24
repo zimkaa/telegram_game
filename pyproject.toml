@@ -1,5 +1,29 @@
+[project]
+name = "telegram_game"
+version = "0.1.0"
+requires-python = ">= 3.11"
+authors = [
+    {name = "Anton Zimin", email = "zimkaa87@gmail.com"},
+]
+description = "Test project"
+readme = "README.md"
+license = {file = "LICENSE.txt"}
+dependencies = [
+    "pydantic-settings >= 2.2.1",
+    "pydantic >= 2.6.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff >= 0.1.9",
+    "mypy >= 1.8.0",
+    "pytest >= 7.4.3",
+    "pylint >= 3.0.3",
+    "pre-commit >= 3.6.0",
+]
+
 [tool.poetry]
-name = "telegram-game"
+name = "telegram_game"
 version = "0.1.0"
 description = ""
 authors = ["Anton Zimin <zimkaa87@gmail.com>"]
@@ -7,11 +31,20 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pydantic = "^2.6.4"
+pydantic-settings = "^2.2.1"
 
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.8.0"
+pytest = "^8.1.1"
+pylint = "^3.0.3"
+pre-commit = "^3.6.0"
+ruff = "^0.3.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
 [tool.pytest.ini_options]
 addopts = "-vvv"
 cache_dir = "/tmp/pytest_cache"
@@ -77,8 +110,8 @@ exclude = [
 
 [tool.ruff.lint.isort]
 no-lines-before = ["standard-library", "local-folder"]
-known-third-party = []
-known-local-folder = ["whole_app"]
+known-third-party = ["src"]
+known-local-folder = ["src"]
 lines-after-imports = 2
 force-single-line = true
 
@@ -97,4 +130,3 @@ exclude = ["~/.pyenv/*", ".venv/", "alembic/"]
 
 [tool.pyright]
 ignore = ["server"]
-

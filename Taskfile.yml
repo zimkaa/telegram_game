@@ -113,4 +113,3 @@ tasks:
     dotenv: [build_version]
     cmds:
       - docker run --platform linux/amd64 --env-file .dev.env --name "${APP_NAME}-${APP_VERSION}" -d "zimkaa/${APP_NAME}:${APP_VERSION}"
-
