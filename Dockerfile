@@ -1,7 +1,7 @@
 ###########
 # BUILDER #
 ###########
-FROM python:3.10 as builder
+FROM python:3.11 as builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 ###########
 ## IMAGE ##
 ###########
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /home/appuser/app
 
@@ -31,4 +31,4 @@ RUN chown -R appuser:appgroup /home/appuser/app
 
 USER appuser
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["./entrypoint.sh"]

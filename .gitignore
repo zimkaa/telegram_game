@@ -4,6 +4,7 @@
 __pycache__/
 .pytest_cache/
 .mypy_cache/
+logs/
 
 ## files
 *.pyc
@@ -11,6 +12,10 @@ __pycache__/
 *.log.zip
 .python-version
 .pre-commit-config.yaml
+
+test.py
+test2.py
+file
 
 # dotenv
 .env
