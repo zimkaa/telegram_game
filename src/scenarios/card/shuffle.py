@@ -1,4 +1,4 @@
-from random import choices
+from random import sample
 
 
 words = [
@@ -95,4 +95,5 @@ words = [
 ]
 
 
-game_words = choices(words, k=25)  # noqa: S311
+def get_shuffled_words() -> list[str]:
+    return sample(words, k=25)
