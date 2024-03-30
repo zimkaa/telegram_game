@@ -1,0 +1,28 @@
+import logging.config
+from pathlib import Path
+from typing import Final
+
+import yaml  # type: ignore[import]
+
+from .settings import settings
+
+
+LOGGER_FOLDER_NAME: Final[str] = "logger"
+LOGGER_CONFIG_FOLDER_NAME: Final[str] = "logging_config"
+
+ROOT_PATH_LOGGER_FOLDER = Path(LOGGER_FOLDER_NAME)
+PATH_LOGGER_FOLDER = ROOT_PATH_LOGGER_FOLDER / LOGGER_CONFIG_FOLDER_NAME
+
+logger = logging.getLogger(settings.APP_NAME)
+
+
+def setup_logging(config_file: str) -> None:
+    config_file = PATH_LOGGER_FOLDER / config_file  # type: ignore[assignment]
+    with Path(config_file).open() as f_in:
+        config = yaml.safe_load(f_in)
+
+    logging.config.dictConfig(config)
+
+
+logger.setLevel(settings.LOGGER_LEVEL)
+setup_logging(settings.LOGGER_CONFIG_FILE)
