@@ -14,7 +14,7 @@ from src.domain.value_object.score import Score
 
 class Game(BaseEntity):
     id: UUID4 = Field(default_factory=uuid4)
-    teams: tuple[Team, Team]
+    teams: tuple[Team, Team] | None = Field(default=None)
     # color: TeamColor  # noqa: ERA001
     start_at: datetime | None = Field(default=None)
     end_at: datetime | None = Field(default=None)

@@ -3,6 +3,7 @@ import pytest
 from src.domain.entity.game import Game
 from src.domain.entity.team import Team
 from src.domain.entity.user import User
+from src.scenarios.card.shuffle import get_shuffled_words
 
 
 @pytest.fixture()
@@ -52,3 +53,8 @@ def static_teams(static_team: Team, random_team: Team) -> tuple[Team, Team]:
 @pytest.fixture()
 def game(static_teams: tuple[Team, Team]) -> Game:
     return Game(teams=static_teams)
+
+
+@pytest.fixture()
+def game_words() -> list[str]:
+    return get_shuffled_words()
