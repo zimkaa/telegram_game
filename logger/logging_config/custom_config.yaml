@@ -31,7 +31,7 @@ handlers:
     backupCount: 3
 loggers:
   root:
-    level: DEBUG
+    level: INFO
     handlers:
     - stdout
     - file

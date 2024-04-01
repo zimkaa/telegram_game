@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(extra="ignore", env_file=".env", env_file_encoding="utf-8")
 
     DEBUG: bool = Field(default=False)
-    LOGGER_LEVEL: str = Field(default="DEBUG" if DEBUG else "INFO")
+    LOGGER_LEVEL: str = Field(default="")
     LOGGER_CONFIG_FILE: str = Field(default="custom_config.yaml")
 
     MINIMUM_PLAYERS: int = Field(default=4, ge=4, le=16)

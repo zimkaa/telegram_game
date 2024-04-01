@@ -24,5 +24,7 @@ def setup_logging(config_file: str) -> None:
     logging.config.dictConfig(config)
 
 
-logger.setLevel(settings.LOGGER_LEVEL)
+debug_level = "DEBUG" if settings.DEBUG else "INFO"
+logger_level = settings.LOGGER_LEVEL if settings.LOGGER_LEVEL else debug_level
+logger.setLevel(logger_level)
 setup_logging(settings.LOGGER_CONFIG_FILE)
