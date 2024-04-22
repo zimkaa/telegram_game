@@ -1,4 +1,4 @@
-# import datetime as dt  # noqa: ERA001
+from __future__ import annotations
 import json
 import logging
 import time
@@ -48,18 +48,30 @@ class StdoutCustomFormatter(logging.Formatter):
     ) -> None:
         super().__init__()
         self.fmt_keys = fmt_keys if fmt_keys is not None else {}
-        fmt = self.fmt_keys["format"].split(" ")
+
+        self.format_date = self.fmt_keys.get("datefmt", None)
+        if self.format_date is None:
+            self.format_date = DATEFMT
+
+        format_string = self.fmt_keys.get("format", None)
+        if format_string is None:
+            format_string = "%(asctime)s | %(levelname)8s | %(filename)s:%(lineno)3d | %(message)s"
+        fmt = format_string.split(" | ")
+        asctime = fmt[0]
+        levelname = fmt[1]
+        third_part = "".join(fmt[2:-1])
+        message = fmt[-1]
         self.FORMATS = {
-            logging.DEBUG: f"{GREEN}{fmt[0]}{NC} | {fmt[1]} | {''.join(fmt[2:-1])} | {fmt[-1]}",
-            logging.INFO: f"{GREEN}{fmt[0]}{NC} | {BLUE}{fmt[1]} | {''.join(fmt[2:-1])}{NC} | {fmt[-1]}",
-            logging.WARNING: f"{GREEN}{fmt[0]}{NC} | {YELLOW}{fmt[1]} | {''.join(fmt[2:-1])}{NC} | {fmt[-1]}",
-            logging.ERROR: f"{GREEN}{fmt[0]}{NC} | {ORANGE}{fmt[1]} | {''.join(fmt[2:-1])}{NC} | {fmt[-1]}",
-            logging.CRITICAL: f"{GREEN}{fmt[0]}{NC} | {RED}{fmt[1]} | {''.join(fmt[2:-1])}{NC} | {fmt[-1]}",
+            logging.DEBUG: f"{GREEN}{asctime}{NC} | {levelname} | {third_part} | {message}",
+            logging.INFO: f"{GREEN}{asctime}{NC} | {BLUE}{levelname} | {third_part}{NC} | {message}",
+            logging.WARNING: f"{GREEN}{asctime}{NC} | {YELLOW}{levelname} | {third_part}{NC} | {message}",
+            logging.ERROR: f"{GREEN}{asctime}{NC} | {ORANGE}{levelname} | {third_part}{NC} | {message}",
+            logging.CRITICAL: f"{GREEN}{asctime}{NC} | {RED}{levelname} | {third_part}{NC} | {message}",
         }
 
     def format(self, record: logging.LogRecord) -> str:
         log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt, datefmt=DATEFMT)
+        formatter = logging.Formatter(log_fmt, datefmt=self.format_date)
         return formatter.format(record)
 
 
@@ -81,7 +93,6 @@ class JSONCustomFormatter(logging.Formatter):
         timestamp = time.strftime(DATEFMT, ct)
         always_fields = {
             "message": record.getMessage(),
-            # "timestamp": dt.datetime.fromtimestamp(record.created, tz=dt.UTC).isoformat(),  # noqa: ERA001
             "timestamp": timestamp,
         }
         if record.exc_info is not None:
