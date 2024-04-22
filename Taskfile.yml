@@ -68,12 +68,7 @@ tasks:
     desc: "Build docker container telegram bot Example: task build-docker-bot-without-run -- -p"
     cmds:
       - task build-version -- {{.CLI_ARGS}}
-      - docker compose -f docker-compose-dev.yaml --env-file build_version create --build
-
-  push-docker-container:
-    desc: "Push docker container to docker hub"
-    cmds:
-      - docker image push --all-tags zimkaa/sales_bot
+      - docker compose -f docker-compose-dev.yaml --env-file ./build_version create --build
 
   run-docker-bot:
     desc: Run docker container telegram bot
