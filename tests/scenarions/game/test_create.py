@@ -1,7 +1,7 @@
 from src.config.words import GAME_WORDS
 from src.config.words import MAX_GAME_WORDS
 from src.domain.entity.user import User
-from src.scenarios.team.create_team import create_teams
+from src.use_cases.team.create_team import create_teams
 
 
 def test_create(players: list[User]) -> None:

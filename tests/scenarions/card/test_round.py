@@ -1,7 +1,7 @@
 from src.config.constants import MAX_FIRST_TEAM_CARDS
 from src.config.constants import MAX_NEUTRAL_CARDS
 from src.config.constants import MAX_SECOND_TEAM_CARDS
-from src.scenarios.card.team_words import RoundCard
+from src.use_cases.card.team_words import RoundCard
 
 
 def test_cards_set(game_words: list[str]) -> None:
