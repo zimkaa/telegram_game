@@ -16,7 +16,7 @@ class Team(BaseEntity):
     players: list[User]
     # color: TeamColor  # noqa: ERA001
     role: Role = Role.PLAYER
-    score: Score | None = Field(default=None)
+    score: Score
     created_at: datetime | None = Field(default=None)
 
     @field_validator("players", mode="before")
