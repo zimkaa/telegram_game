@@ -1,29 +1,21 @@
-from src.domain.entity.game import Game
-from src.domain.entity.team import Team
+from abc import ABC
+from abc import abstractmethod
+
+from src.domain.entity.game import GameEntity
 from src.domain.entity.user import User
-from src.domain.utils.status import GameStatus
-from src.use_cases.team.create_team import create_teams
 
 
-def create_game(players: list[User]) -> Game:
-    teams = create_teams(players)
-    return Game(teams=teams)
-
-
-class GameScenarios(Game):
+class BaseGame(ABC, GameEntity):
     players: list[User]
 
+    @abstractmethod
     def set_players(self, players: list[User]) -> None:
-        self.players = players
+        pass
 
+    @abstractmethod
     def create_game(self) -> None:
-        self.teams = self._create_game()
+        pass
 
-    def _create_game(self) -> tuple[Team, Team]:
-        return create_teams(self.players)
-
+    @abstractmethod
     def start(self) -> None:
-        self.status = GameStatus.STARTED
-
-    def _distribute_words_to_teams(self) -> None:
         pass

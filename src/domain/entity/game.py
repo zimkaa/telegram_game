@@ -12,7 +12,7 @@ from src.domain.utils.status import GameStatus
 from src.domain.value_object.score import Score
 
 
-class Game(BaseEntity):
+class GameEntity(BaseEntity):
     id: UUID4 = Field(default_factory=uuid4)
     teams: tuple[Team, Team] | None = Field(default=None)
     # color: TeamColor  # noqa: ERA001
