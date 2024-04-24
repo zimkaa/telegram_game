@@ -31,4 +31,4 @@ RUN chown -R appuser:appgroup /home/appuser/app
 
 USER appuser
 
-CMD ["./entrypoint.sh"]
+CMD ["./start_app.sh"]
