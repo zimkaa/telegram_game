@@ -8,11 +8,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN pip install poetry
 COPY ./pyproject.toml ./poetry.lock /app/
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev
 
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install poetry && \
+    poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev && \
+    pip install --no-cache-dir --upgrade -r requirements.txt
 
 ###########
 ## IMAGE ##
@@ -25,7 +25,7 @@ COPY . /home/appuser/app
 
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
-COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 
 RUN chown -R appuser:appgroup /home/appuser/app
 

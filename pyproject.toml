@@ -121,11 +121,18 @@ force-single-line = true
 quote-style = "double"
 
 [tool.mypy]
-python_version = "3.11"
 cache_dir = "/tmp/mypy_cache"
-ignore_missing_imports = true
-strict = false
+disable_error_code = "import-untyped"
 exclude = ["~/.pyenv/*", ".venv/", "alembic/"]
+ignore_missing_imports = true
+python_version = "3.11"
+plugins = [
+    "pydantic.mypy",
+]
+strict = false
 
 [tool.pyright]
-ignore = ["server"]
+ignore = []
+include = ["src"]
+pythonVersion = "3.11"
+reportInvalidTypeForm = "none"

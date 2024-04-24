@@ -1,5 +1,5 @@
 from src.config.constants import MAX_GAME_CARDS
-from src.scenarios.card.shuffle import get_shuffled_words
+from src.use_cases.card.shuffle import get_shuffled_words
 
 
 def test_shuffle() -> None:

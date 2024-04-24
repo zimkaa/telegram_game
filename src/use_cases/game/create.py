@@ -2,7 +2,7 @@ from src.domain.entity.game import Game
 from src.domain.entity.team import Team
 from src.domain.entity.user import User
 from src.domain.utils.status import GameStatus
-from src.scenarios.team.create_team import create_teams
+from src.use_cases.team.create_team import create_teams
 
 
 def create_game(players: list[User]) -> Game:

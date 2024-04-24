@@ -3,7 +3,7 @@ import pytest
 from src.domain.entity.game import Game
 from src.domain.entity.team import Team
 from src.domain.entity.user import User
-from src.scenarios.card.shuffle import get_shuffled_words
+from src.use_cases.card.shuffle import get_shuffled_words
 
 
 @pytest.fixture()
